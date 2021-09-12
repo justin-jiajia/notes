@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block tittle %}我的笔记本{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    {% assets "css_all" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body class="mdui-theme-primary-indigo">
+<div class="mdui-appbar">
+    <div class="mdui-toolbar mdui-color-theme">
+        <i class="mdui-icon material-icons mdui-ripple" mdui-drawer="{target: '.mdui-drawer'}">menu</i>
+        <span class="mdui-typo-title">{% block tittle2 %}我的笔记本{% endblock %}</span>
+    </div>
+    <div class="mdui-drawer mdui-drawer-full-height mdui-appbar-inset mdui-drawer-close">
+        <div class="mdui-list">
+            <a href="/" class="mdui-list-item mdui-ripple">首页</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.logout') }}" class="mdui-list-item mdui-ripple">登出</a>
+            {% else %}
+                <a href="{{ url_for('main.get_login') }}" class="mdui-list-item mdui-ripple">登入</a>
+                <a href="{{ url_for('main.sign_up') }}" class="mdui-list-item mdui-ripple">注册</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<main>
+    {% for categories, message in get_flashed_messages(with_categories=True) %}
+        <div class="{{ categories }}">{{ message }}</div>
+    {% endfor %}
+    {% block alerts %}
+    {% endblock %}
+    {% block main %}
+    {% endblock %}
+</main>
+<footer>
+    <p class="mdui-typo">作者：嘉嘉&nbsp;&nbsp;&nbsp;<a href="https://yanzijia.top">网站：yanzijia.top</a></p>
+</footer>
+
+{% assets "js_all" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% if 'MSIE' in request.headers.get('User-Agent') or 'Trident' in request.headers.get('User-Agent') %}
+    <script>
+        mdui.snackbar('你正在使用IE浏览器，可能出现时间无法显示、组件错位等问题，建议更换为Edge、FireFox等现代浏览器',
+            {timeout: 0, position: 'right-top'})
+    </script>
+{% endif %}
+{% block script %}
+{% endblock %}
+</body>
+</html>

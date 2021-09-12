@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block tittle %}登录{% endblock %}
+{% block tittle2 %}登录{% endblock %}
+{% block alerts %}
+    {% for message in form.UserName.errors %}
+        <div class="error-alert">{{ message }}</div><br>
+    {% endfor %}
+    {% for message in form.Password.errors %}
+        <div class="error-alert">{{ message }}</div><br>
+    {% endfor %}
+{% endblock %}
+
+{% block main %}
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <i class="mdui-icon material-icons">&#xe853;</i>
+            {{ form.UserName.label(class="mdui-textfield-label") }}
+            {{ form.UserName(class="mdui-textfield-input") }}
+        </div>
+
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <i class="mdui-icon material-icons">&#xe897;</i>
+            {{ form.Password.label(class="mdui-textfield-label") }}
+            {{ form.Password(class="mdui-textfield-input") }}
+        </div>
+        <label class="mdui-checkbox">
+            {{ form.Remember }}
+            <i class="mdui-checkbox-icon"></i>
+            记住我
+        </label>
+        <br>
+        {{ form.Submit(class="mdui-btn mdui-btn-raised mdui-ripple") }}
+        <a href="{{ url_for('main.sign_up') }}" class="mdui-btn mdui-btn-raised mdui-ripple">注册</a>
+    </form>
+{% endblock %}

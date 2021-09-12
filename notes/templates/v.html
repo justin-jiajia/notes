@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block tittle %}查看笔记{% endblock %}
+{% block tittle2 %}查看笔记{% endblock %}
+
+
+{% block css %}
+    {{ ckeditor.load_code_theme() }}
+{% endblock %}
+
+{% block main %}
+    <h1>{{ note.tittle }}</h1>
+    <div class="note">
+        {{ note.body|safe }}
+    </div>
+    <a href="{{ url_for('main.edit_note', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">编辑</a>
+    <form method="post" action={{ url_for('main.del_note') }}>
+        {{ del_note.csrf_token }}
+        {{ del_note.N_id(value=note.id) }}
+        {{ del_note.Submit(class="mdui-btn mdui-btn-raised mdui-ripple mdui-float-right") }}
+    </form>
+    <br/><br/><br/>
+{% endblock %}

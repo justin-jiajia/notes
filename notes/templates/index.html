@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    {{ ckeditor.load_code_theme() }}
+{% endblock %}
+
+{% block main %}
+    <a href="{{ url_for('main.new') }}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme"><i
+            class="mdui-icon material-icons">add</i></a>
+    <h2>{{ current_user.name }}的笔记本({{ page.total }})：</h2>
+    {% for note in page.items %}
+        <h2>{{ note.tittle }}</h2>
+        <p class="mdui-float-right time"
+           data-timestamp="{{ note.time_stamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ moment(note.time_stamp).fromNow(refresh=True) }}</p>
+        <hr>
+        <div class="note_inf">{{ note.body|safe }}</div>
+        <a href="{{ url_for('main.edit_note', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">编辑</a>
+        <form method="post" action={{ url_for('main.del_note') }}>
+            {{ del_note.csrf_token }}
+            {{ del_note.N_id(value=note.id) }}
+            {{ del_note.Submit(class="mdui-btn mdui-btn-raised mdui-ripple mdui-float-right") }}
+        </form>
+        <a href="{{ url_for('main.v', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">查看</a>
+        <br/><br/><br/>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+    <div class="mdui-center">
+        {% if page.has_prev %}
+            <a href="{{ url_for('main.index', page=page.prev_num) }}" class="mdui-float-left mdui-btn">&lt;上一页</a>
+        {% else %}
+            <a class="mdui-float-left mdui-btn mdui-btn-dense" disabled>&lt;上一页</a>
+        {% endif %}
+        <p class="mdui-float-left">{{ page.page }}/{{ page.pages }}</p>
+        {% if page.has_next %}
+            <a href="{{ url_for('main.index', page=page.next_num) }}" class="mdui-float-left mdui-btn">下一页&gt;</a>
+        {% else %}
+            <a class="mdui-float-left mdui-btn" disabled>下一页&gt;</a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flask-moment.js') }}"></script>
+    <script>
+        moment.locale(window.navigator.userLanguage || window.navigator.language);
+        $('.time').each(function () {
+            const $this = $(this);
+            new mdui.Tooltip($this, {content: moment($this.data('timestamp')).format('LLL'), position: 'left'});
+        })
+    </script>
+{% endblock %}
