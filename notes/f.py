@@ -19,7 +19,7 @@ class SignUpForm(FlaskForm):
     Submit = SubmitField('注册')
 
     def validate_UserName(form, field):
-        if Users.query.filter_by(name=field.data):
+        if Users.query.filter_by(name=field.data).all():
             raise ValidationError('用户名已存在')
 
 

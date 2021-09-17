@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -12,13 +11,13 @@
     {% endblock %}
 </head>
 
-<body class="mdui-theme-primary-indigo">
-<div class="mdui-appbar">
+<body class="mdui-theme-primary-indigo mdui-appbar-with-toolbar">
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-inset">
     <div class="mdui-toolbar mdui-color-theme">
         <i class="mdui-icon material-icons mdui-ripple" mdui-drawer="{target: '.mdui-drawer'}">menu</i>
         <span class="mdui-typo-title">{% block tittle2 %}我的笔记本{% endblock %}</span>
     </div>
-    <div class="mdui-drawer mdui-drawer-full-height mdui-appbar-inset mdui-drawer-close">
+    <div class="mdui-drawer mdui-drawer-full-height mdui-drawer-close">
         <div class="mdui-list">
             <a href="/" class="mdui-list-item mdui-ripple">首页</a>
             {% if current_user.is_authenticated %}
