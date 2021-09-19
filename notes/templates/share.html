@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block tittle %}查看笔记{% endblock %}
+{% block tittle2 %}查看笔记{% endblock %}
+
+{% block css %}
+    {{ ckeditor.load_code_theme() }}
+{% endblock %}
+
+{% block main %}
+    <h1>{{ note.tittle }}</h1>
+    <div class="note">
+        {{ note.body|safe }}
+    </div>
+    <br/><br/><br/>
+{% endblock %}

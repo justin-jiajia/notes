@@ -68,7 +68,7 @@ def index():
 def new():
     form = New()
     if form.validate_on_submit():
-        note = Notes(tittle=to_safe(form.Tittle.data), body=to_safe(form.Body.data), u_id=current_user.id)
+        note = Notes(tittle=to_safe(form.Tittle.data), body=to_safe(form.Body.data), u_id=current_user.id, uuid=uuid4().hex)
         db.session.add(note)
         db.session.commit()
         flash('发布成功！')
@@ -115,7 +115,7 @@ def del_note():
         abort(403)
 
 
-@main.route('/v/<int:p_id>')
+@main.route('/v/<int:p_id>/')
 @login_required
 def v(p_id):
     note = Notes.query.get_or_404(p_id)
@@ -124,6 +124,14 @@ def v(p_id):
         abort(403)
     return render_template('v.html', note=note, del_note=del_form)
 
+
+@main.route('/share/<string:uuid>/')
+def share(uuid):
+    note = Notes.query.filter_by(uuid=uuid).one_or_none()
+    if note is None:
+        abort(404)
+    else:
+        return render_template('share.html', note=note)
 
 @main.route('/files/<path:filename>/')
 def uploaded_files(filename):

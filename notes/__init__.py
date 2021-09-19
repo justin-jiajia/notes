@@ -46,7 +46,10 @@ def create_app():
     def initdb(drop):
         """Initialize the database."""
         if drop:
+            echo('Dropping...')
             db.drop_all()
+            echo('Drop!')
+        echo('Creating..')
         db.create_all()
         echo('OK!')
 

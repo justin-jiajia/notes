@@ -8,13 +8,14 @@ class Notes(db.Model):
     tittle = db.Column(db.String(20))
     body = db.Column(db.Text())
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow)
+    uuid = db.Column(db.String(129))
     u_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True)
-    password = db.Column(db.Text(128))
+    password = db.Column(db.Text())
     notes = db.relationship('Notes')
 
 

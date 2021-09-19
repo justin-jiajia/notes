@@ -15,6 +15,7 @@
         <hr>
         <div class="note_inf">{{ note.body|safe }}</div>
         <a href="{{ url_for('main.edit_note', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">编辑</a>
+        <a href="javascript:mdui.alert('{{ url_for('main.share', uuid=note.uuid, _external=True) }}', '分享');" class="mdui-btn mdui-btn-raised mdui-float-right">分享</a>
         <form method="post" action={{ url_for('main.del_note') }}>
             {{ del_note.csrf_token }}
             {{ del_note.N_id(value=note.id) }}
