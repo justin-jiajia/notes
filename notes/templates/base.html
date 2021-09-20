@@ -45,7 +45,7 @@
 {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-{% if 'MSIE' in request.headers.get('User-Agent') or 'Trident' in request.headers.get('User-Agent') %}
+{% if 'MSIE' in request.headers.get('User-Agent', '') or 'Trident' in request.headers.get('User-Agent', '') %}
     <script>
         mdui.snackbar('你正在使用IE浏览器，可能出现时间无法显示、组件错位等问题，建议更换为Edge、FireFox等现代浏览器',
             {timeout: 0, position: 'right-top'})
