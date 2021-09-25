@@ -12,6 +12,7 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         CKEDITOR_FILE_UPLOADER='/upload',
         CKEDITOR_ENABLE_CODESNIPPET=True,
+        WHOOSHEE_MIN_STRING_LEN=1,
     )
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
@@ -21,12 +22,13 @@ def create_app():
     app.register_blueprint(main)
 
     # 注册扩展
-    from notes.e import db, moment, login, cke, assets
+    from notes.e import db, moment, login, cke, assets, whoshee
     db.init_app(app)
     moment.init_app(app)
     login.init_app(app)
     cke.init_app(app)
     assets.init_app(app)
+    whoshee.init_app(app)
     # 注册flask_assets
     from flask_assets import Bundle
     css = Bundle('css/mdui.min.css',
@@ -53,6 +55,11 @@ def create_app():
         db.create_all()
         echo('OK!')
 
+    @app.cli.command()
+    def reindex():
+        echo('Reindexing...')
+        whoshee.reindex()
+        echo('OK!')
     # 注册错误视图函数
     @app.errorhandler(404)
     def page_not_found(e):

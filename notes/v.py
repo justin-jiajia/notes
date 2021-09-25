@@ -6,7 +6,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from flask import Blueprint, abort, flash, redirect, render_template, request, send_from_directory, url_for, current_app
 
 from notes.e import db
-from notes.h import to_safe
+from notes.h import to_safe, clean
 from notes.m import Notes, Users
 from notes.f import Del, Edit, LoginForm, New, SignUpForm
 
@@ -68,7 +68,8 @@ def index():
 def new():
     form = New()
     if form.validate_on_submit():
-        note = Notes(tittle=to_safe(form.Tittle.data), body=to_safe(form.Body.data), u_id=current_user.id, uuid=uuid4().hex)
+        note = Notes(tittle=to_safe(form.Tittle.data), body=to_safe(form.Body.data), clean_body=clean(form.Body.data),
+                     u_id=current_user.id, uuid=uuid4().hex)
         db.session.add(note)
         db.session.commit()
         flash('发布成功！')
@@ -90,6 +91,7 @@ def edit_note(p_id):
             return redirect(url_for('main.index'))
         note.tittle = to_safe(form.Tittle.data)
         note.body = to_safe(form.Body.data)
+        note.clean_body = clean(form.Body.data)
         db.session.commit()
         flash('发布成功！')
         return redirect(url_for('main.index'))
@@ -132,6 +134,19 @@ def share(uuid):
         abort(404)
     else:
         return render_template('share.html', note=note)
+
+
+@main.route('/search/')
+def search():
+    q = request.args.get('q', '')
+    if q == '':
+        flash('请输入搜索内容！')
+        return redirect(url_for('main.index'))
+    del_form = Del()
+    notes = Notes.query.whooshee_search(q).order_by(Notes.time_stamp.desc()).with_parent(current_user). \
+        paginate(request.args.get('page', 1, type=int), per_page=5)
+    return render_template('search.html', page=notes, del_note=del_form, q=q)
+
 
 @main.route('/files/<path:filename>/')
 def uploaded_files(filename):

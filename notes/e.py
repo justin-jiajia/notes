@@ -3,12 +3,14 @@ from flask_moment import Moment
 from flask_login import LoginManager
 from flask_ckeditor import CKEditor
 from flask_assets import Environment
+from flask_whooshee import Whooshee
 
 db = SQLAlchemy()
 moment = Moment()
 login = LoginManager()
 cke = CKEditor()
 assets = Environment()
+whoshee = Whooshee()
 
 
 @login.user_loader

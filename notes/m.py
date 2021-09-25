@@ -1,13 +1,15 @@
 from datetime import datetime
 from flask_login import UserMixin
-from notes.e import db
+from notes.e import db, whoshee
 
 
+@whoshee.register_model('tittle', 'clean_body')
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tittle = db.Column(db.String(20))
     body = db.Column(db.Text())
-    time_stamp = db.Column(db.DateTime, default=datetime.utcnow)
+    clean_body = db.Column(db.Text())
+    time_stamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     uuid = db.Column(db.String(129))
     u_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
