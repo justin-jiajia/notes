@@ -137,6 +137,7 @@ def share(uuid):
 
 
 @main.route('/search/')
+@login_required
 def search():
     q = request.args.get('q', '')
     if q == '':
@@ -154,6 +155,7 @@ def uploaded_files(filename):
 
 
 @main.route('/upload', methods=['POST'])
+@login_required
 def upload():
     f = request.files.get('upload')  # 获取上传图片文件对象
     # Add more validations here
