@@ -22,26 +22,12 @@ def create_app():
     app.register_blueprint(main)
 
     # 注册扩展
-    from notes.e import db, moment, login, cke, assets, whoshee
+    from notes.e import db, moment, login, cke, whoshee
     db.init_app(app)
     moment.init_app(app)
     login.init_app(app)
     cke.init_app(app)
-    assets.init_app(app)
     whoshee.init_app(app)
-    # 注册flask_assets
-    from flask_assets import Bundle
-    css = Bundle('css/mdui.min.css',
-                 'css/style.css',
-                 filters='cssmin', output='gen/packed.css')
-
-    js = Bundle('js/jquery.min.js',
-                'js/mdui.min.js',
-                'js/script.js',
-                filters='jsmin', output='gen/packed.js')
-    assets.register('js_all', js)
-    assets.register('css_all', css)
-
     # 注册自定义函数
     @app.cli.command()
     @option('--drop', is_flag=True, help='Create after drop.')

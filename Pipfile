@@ -14,7 +14,6 @@ flask-login = "*"
 flask-moment = "*"
 flask-ckeditor = "*"
 flask-wtf = "*"
-flask-assets = "*"
 cssmin = "*"
 jsmin = "*"
 

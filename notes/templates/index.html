@@ -49,7 +49,7 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="{{ url_for('static', filename='js/flask-moment.js') }}"></script>
     <script>
         moment.locale(window.navigator.userLanguage || window.navigator.language);

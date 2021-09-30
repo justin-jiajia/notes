@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
+<link lang="zh" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>{% block tittle %}我的笔记本{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
-    {% assets "css_all" %}
-        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
-    {% endassets %}
+    <link href="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.2/css/mdui.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     {% block css %}
     {% endblock %}
 </head>
@@ -57,9 +56,10 @@
     <p class="mdui-typo">作者：嘉嘉&nbsp;&nbsp;&nbsp;<a href="https://yanzijia.top">网站：yanzijia.top</a></p>
 </footer>
 
-{% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.2/js/mdui.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 {% if 'MSIE' in request.headers.get('User-Agent', '') or 'Trident' in request.headers.get('User-Agent', '') %}
     <script>
         mdui.snackbar('你正在使用IE浏览器，可能出现时间无法显示、组件错位等问题，建议更换为Edge、FireFox等现代浏览器',
