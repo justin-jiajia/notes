@@ -23,8 +23,8 @@
                 {{ del_note.csrf_token }}
                 {{ del_note.N_id(value=note.id) }}
                 {{ del_note.Submit(class="mdui-btn mdui-btn-raised mdui-ripple mdui-float-right") }}
+                <a href="{{ url_for('main.v', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">查看</a>
             </form>
-            <a href="{{ url_for('main.v', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">查看</a>
             <br/><br/><br/>
             {% if not loop.last %}
                 <hr>
@@ -49,7 +49,8 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/locale/zh-cn.min.js"></script>
     <script src="{{ url_for('static', filename='js/flask-moment.js') }}"></script>
     <script>
         moment.locale(window.navigator.userLanguage || window.navigator.language);

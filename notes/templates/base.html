@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<link lang="zh" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
@@ -31,16 +30,16 @@
             </div>
         {% endif %}
     </div>
-    <div class="mdui-drawer mdui-drawer-full-height mdui-drawer-close mdui-color-white">
-        <div class="mdui-list">
-            <a href="/" class="mdui-list-item mdui-ripple">首页</a>
-            {% if current_user.is_authenticated %}
-                <a href="{{ url_for('main.logout') }}" class="mdui-list-item mdui-ripple">登出</a>
-            {% else %}
-                <a href="{{ url_for('main.get_login') }}" class="mdui-list-item mdui-ripple">登入</a>
-                <a href="{{ url_for('main.sign_up') }}" class="mdui-list-item mdui-ripple">注册</a>
-            {% endif %}
-        </div>
+</div>
+<div class="mdui-drawer mdui-drawer-full-height mdui-drawer-close mdui-color-white">
+    <div class="mdui-list">
+        <a href="/" class="mdui-list-item mdui-ripple">首页</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main.logout') }}" class="mdui-list-item mdui-ripple">登出</a>
+        {% else %}
+            <a href="{{ url_for('main.get_login') }}" class="mdui-list-item mdui-ripple">登入</a>
+            <a href="{{ url_for('main.sign_up') }}" class="mdui-list-item mdui-ripple">注册</a>
+        {% endif %}
     </div>
 </div>
 <main>
@@ -69,4 +68,3 @@
 {% block script %}
 {% endblock %}
 </body>
-</html>

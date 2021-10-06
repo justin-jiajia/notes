@@ -14,8 +14,6 @@ flask-login = "*"
 flask-moment = "*"
 flask-ckeditor = "*"
 flask-wtf = "*"
-cssmin = "*"
-jsmin = "*"
 
 [dev-packages]
 watchdog = "*"
