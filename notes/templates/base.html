@@ -1,3 +1,4 @@
+<!DOCTYPE>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,7 @@
 <body class="mdui-theme-primary-indigo mdui-appbar-with-toolbar">
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-inset">
     <div class="mdui-toolbar mdui-color-theme">
-        <i class="mdui-icon material-icons mdui-ripple" mdui-drawer="{target: '.mdui-drawer'}">menu</i>
+        <i class="mdui-icon material-icons mdui-ripple" mdui-drawer="{target: '.mdui-drawer', overlay: true}">menu</i>
         <span class="mdui-typo-title">{% block tittle2 %}我的笔记本{% endblock %}</span>
         <div class="mdui-toolbar-spacer"></div>
         {% if current_user.is_authenticated %}
@@ -68,3 +69,4 @@
 {% block script %}
 {% endblock %}
 </body>
+</html>

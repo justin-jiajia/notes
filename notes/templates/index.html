@@ -6,31 +6,45 @@
 
 {% block main %}
     <a href="{{ url_for('main.new') }}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme"><i
-            class="mdui-icon material-icons">add</i></a>
+            class="mdui-icon material-icons mdui-icon-left">add</i></a>
     <h2>{{ current_user.name }}的笔记本({{ page.total }})：</h2>
     {% if page.items %}
         {% for note in page.items %}
-            <h2>{{ note.tittle }}</h2>
-            <p class="mdui-float-right time"
-               data-timestamp="{{ note.time_stamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ moment(note.time_stamp).fromNow(refresh=True) }}</p>
-            <hr>
-            <div class="note_inf">{{ note.body|safe }}</div>
-            <a href="{{ url_for('main.edit_note', p_id=note.id) }}"
-               class="mdui-btn mdui-btn-raised mdui-float-right">编辑</a>
-            <a href="javascript:mdui.alert('{{ url_for('main.share', uuid=note.uuid, _external=True) }}', '分享');"
-               class="mdui-btn mdui-btn-raised mdui-float-right">分享</a>
-            <form method="post" action={{ url_for('main.del_note') }}>
-                {{ del_note.csrf_token }}
-                {{ del_note.N_id(value=note.id) }}
-                {{ del_note.Submit(class="mdui-btn mdui-btn-raised mdui-ripple mdui-float-right") }}
-                <a href="{{ url_for('main.v', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">查看</a>
-            </form>
-            <br/><br/><br/>
-            {% if not loop.last %}
-                <hr>
-            {% endif %}
+            <div class="mdui-card mdui-center mdui-hoverable note">
+                <div class="mdui-card-actions">
+                    <h2>{{ note.tittle }}</h2>
+                    <p class="mdui-float-right time"
+                       data-timestamp="{{ note.time_stamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ moment(note.time_stamp).fromNow(refresh=True) }}</p>
+                    <hr>
+                    <div class="note_inf">{{ note.body|safe }}</div>
+                    <div class="mdui-btn-group mdui-float-right">
+                        <a href="{{ url_for('main.edit_note', p_id=note.id) }}"
+                           class="mdui-btn mdui-btn-raised mdui-float-right"><i
+                                class="mdui-icon material-icons mdui-icon-left">&#xe3c9;</i><span
+                                class="mdui-hidden-xs-down">编辑</span></a>
+                        <a href="javascript:alert('{{ url_for('main.share', uuid=note.uuid, _external=True) }}');"
+                           class="mdui-btn mdui-btn-raised mdui-float-right"><i
+                                class="mdui-icon material-icons mdui-icon-left">&#xe80d;</i><span
+                                class="mdui-hidden-xs-down">分享</span></a>
+                        <a href="javascript:$('.note-{{ note.id }}-del').submit()"
+                           class="mdui-btn mdui-btn-raised mdui-float-right"><i
+                                class="mdui-icon material-icons mdui-icon-left">&#xe872;</i><span
+                                class="mdui-hidden-xs-down">删除</span></a>
+                        <a href="{{ url_for('main.v', p_id=note.id) }}"
+                           class="mdui-btn mdui-btn-raised mdui-float-right"><i
+                                class="mdui-icon material-icons mdui-icon-left">&#xe417;</i><span
+                                class="mdui-hidden-xs-down">查看</span></a>
+                    </div>
+                    <form method="post" action="{{ url_for('main.del_note') }}" class="note-{{ note.id }}-del">
+                        {{ del_note.csrf_token }}
+                        {{ del_note.N_id(value=note.id) }}
+                        {{ del_note.Submit(class="mdui-hidden") }}
+                    </form>
+                    <br/><br/><br/>
+                </div>
+            </div>
         {% endfor %}
-        <div class="mdui-center">
+        <div class="mdui-center nextpage">
             {% if page.has_prev %}
                 <a href="{{ url_for('main.index', page=page.prev_num) }}" class="mdui-float-left mdui-btn">&lt;上一页</a>
             {% else %}
@@ -44,7 +58,7 @@
             {% endif %}
         </div>
     {% else %}
-        <p>你还没有笔记，快按“<i class="mdui-icon material-icons">add</i>”键创建一个吧！</p>
+        <p>你还没有笔记，快按“<i class="mdui-icon material-icons mdui-icon-left">add</i>”键创建一个吧！</p>
     {% endif %}
 {% endblock %}
 
@@ -53,6 +67,9 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/locale/zh-cn.min.js"></script>
     <script src="{{ url_for('static', filename='js/flask-moment.js') }}"></script>
     <script>
+        if ($(window).width() <= 600) {
+            $('.mdui-icon-left').removeClass('mdui-icon-left')
+        }
         moment.locale(window.navigator.userLanguage || window.navigator.language);
         $('.time').each(function () {
             const $this = $(this);

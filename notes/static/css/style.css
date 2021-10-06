@@ -44,3 +44,24 @@ footer {
     height: 110px;
     overflow: hidden;
 }
+
+.note {
+    margin: 15px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.nextpage {
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 15px!important;
+    margin-bottom: 9pt!important;
+    padding: 10px;
+    width: 225px;
+    height: 55px;
+    border-radius: 18px;
+    background-color: rgba(0,0,0,.3);
+    color: #fff;
+    text-align: center;
+    transition: .3s;
+}
