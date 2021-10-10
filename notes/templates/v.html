@@ -12,12 +12,13 @@
     <div class="note">
         {{ note.body|safe }}
     </div>
-    <a href="{{ url_for('main.edit_note', p_id=note.id) }}" class="mdui-btn mdui-btn-raised mdui-float-right">编辑</a>
-    <a href="javascript:mdui.alert('{{ url_for('main.share', uuid=note.uuid, _external=True) }}', '分享');" class="mdui-btn mdui-btn-raised mdui-float-right">分享</a>
-    <form method="post" action={{ url_for('main.del_note') }}>
-        {{ del_note.csrf_token }}
-        {{ del_note.N_id(value=note.id) }}
-        {{ del_note.Submit(class="mdui-btn mdui-btn-raised mdui-ripple mdui-float-right") }}
-    </form>
+    <a href="{{ url_for('main.edit_note', p_id=note.id) }}"
+       class="mdui-btn mdui-btn-raised mdui-float-right"><i
+            class="mdui-icon material-icons mdui-icon-left">&#xe3c9;</i><span
+            class="mdui-hidden-xs-down">编辑</span></a>
+    <a href="javascript:alert('{{ url_for('main.share', uuid=note.uuid, _external=True) }}');"
+       class="mdui-btn mdui-btn-raised mdui-float-right"><i
+            class="mdui-icon material-icons mdui-icon-left">&#xe80d;</i><span
+            class="mdui-hidden-xs-down">分享</span></a>
     <br/><br/><br/>
 {% endblock %}
