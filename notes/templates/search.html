@@ -12,9 +12,11 @@
         {% for note in page.items %}
             <div class="mdui-card mdui-center mdui-hoverable note">
                 <div class="mdui-card-actions">
+                    <div class="tittle_and_time">
                     <h2>{{ note.tittle }}</h2>
-                    <p class="mdui-float-right time"
+                    <p class="time"
                        data-timestamp="{{ note.time_stamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ moment(note.time_stamp).fromNow(refresh=True) }}</p>
+                    </div>
                     <hr>
                     <div class="note_inf">{{ note.body|safe }}</div>
                     <div class="mdui-btn-group mdui-float-right">
