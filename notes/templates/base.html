@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>{% block tittle %}我的笔记本{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
-    <link href="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.2/css/mdui.min.css" rel="stylesheet">
+    <link href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mdui/1.0.2/css/mdui.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     {% block css %}
     {% endblock %}
@@ -53,11 +53,11 @@
     {% endblock %}
 </main>
 <footer>
-    <p class="mdui-typo">作者：嘉嘉&nbsp;&nbsp;&nbsp;<a href="https://yanzijia.top">网站：yanzijia.top</a></p>
+    <p class="mdui-typo">作者：嘉嘉&nbsp;&nbsp;&nbsp;<a href="https://yanjiajia.cn">网站：yanjiajia.cn</a></p>
 </footer>
 
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.2/js/mdui.min.js"></script>
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js" type="application/javascript"></script>
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/mdui/1.0.2/js/mdui.min.js" type="application/javascript"></script>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 {% if 'MSIE' in request.headers.get('User-Agent', '') or 'Trident' in request.headers.get('User-Agent', '') %}

@@ -20,5 +20,14 @@
        class="mdui-btn mdui-btn-raised mdui-float-right"><i
             class="mdui-icon material-icons mdui-icon-left">&#xe80d;</i><span
             class="mdui-hidden-xs-down">分享</span></a>
+    <a href="javascript:$('.note-{{ note.id }}-del').submit()"
+       class="mdui-btn mdui-btn-raised mdui-float-right"><i
+            class="mdui-icon material-icons mdui-icon-left">&#xe872;</i><span
+            class="mdui-hidden-xs-down">删除</span></a>
+    <form method="post" action="{{ url_for('main.del_note') }}" class="note-{{ note.id }}-del">
+        {{ del_note.csrf_token }}
+        {{ del_note.N_id(value=note.id) }}
+        {{ del_note.Submit(class="mdui-hidden") }}
+    </form>
     <br/><br/><br/>
 {% endblock %}
