@@ -1,7 +1,7 @@
 # Notes
 
 ### 介绍
-一个小笔记应用。使用Flask编写，[demo](https://notes.yanjiajia.cn/) ，欢迎使用！
+一个小笔记应用。使用Flask编写，[demo](https://notes.hijiajia.xyz/) ，欢迎使用！
 
 ### 安装教程
 #### 1.安装依赖
