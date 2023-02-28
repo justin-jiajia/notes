@@ -73,6 +73,8 @@ footer {
 
 .ba{
   position: absolute;
-  top: 0px;
-  right:0px;
+  top: 75px;
+  left:45%;
+  z-index: 999;
+  font-size: large;
 }
