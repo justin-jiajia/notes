@@ -70,3 +70,9 @@ footer {
     display: flex;
     justify-content: space-between;
 }
+
+.ba{
+  position: absolute;
+  top: 0px;
+  right:0px;
+}
