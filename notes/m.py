@@ -6,7 +6,7 @@ from notes.e import db, whoshee
 @whoshee.register_model('tittle', 'clean_body')
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tittle = db.Column(db.String(20))
+    tittle = db.Column(db.Text())
     body = db.Column(db.Text())
     clean_body = db.Column(db.Text())
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
