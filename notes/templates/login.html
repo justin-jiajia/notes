@@ -1,37 +1,67 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
 
-{% block tittle %}登录{% endblock %}
-{% block tittle2 %}登录{% endblock %}
-{% block alerts %}
-    {% for message in form.UserName.errors %}
-        <div class="error-alert">{{ message }}</div><br>
-    {% endfor %}
-    {% for message in form.Password.errors %}
-        <div class="error-alert">{{ message }}</div><br>
-    {% endfor %}
-{% endblock %}
+<head>
+    <title>登录</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+</head>
 
-{% block main %}
+<body>
+    {% for categories, message in get_flashed_messages(with_categories=True) %}
+    <div class="{{ categories }}">{{ message }}</div>
+    {% endfor %}
+    <!-- ARE FROM https://codepen.io/vineethtrv/pen/NxqKoY -->
+    <div class="panda">
+        <div class="ear"></div>
+        <div class="face">
+            <div class="eye-shade"></div>
+            <div class="eye-white">
+                <div class="eye-ball"></div>
+            </div>
+            <div class="eye-shade rgt"></div>
+            <div class="eye-white rgt">
+                <div class="eye-ball"></div>
+            </div>
+            <div class="nose"></div>
+            <div class="mouth"></div>
+        </div>
+        <div class="body"> </div>
+        <div class="foot">
+            <div class="finger"></div>
+        </div>
+        <div class="foot rgt">
+            <div class="finger"></div>
+        </div>
+    </div>
     <form method="post">
         {{ form.csrf_token }}
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <i class="mdui-icon material-icons">&#xe853;</i>
-            {{ form.UserName.label(class="mdui-textfield-label") }}
-            {{ form.UserName(class="mdui-textfield-input") }}
+        <div class="hand"></div>
+        <div class="hand rgt"></div>
+        <h1>微心情记事本&趣聊</h1>
+        <div class="form-group">
+            {{ form.UserName(class="form-control") }}
+            {{ form.UserName.label(class="form-label") }}
+            {% for message in form.UserName.errors %}
+            <div class="error-alert">{{ message }}</div><br>
+            {% endfor %}
         </div>
-
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <i class="mdui-icon material-icons">&#xe897;</i>
-            {{ form.Password.label(class="mdui-textfield-label") }}
-            {{ form.Password(class="mdui-textfield-input") }}
+        <div class="form-group">
+            {{ form.Password(class="form-control") }}
+            {{ form.Password.label(class="form-label") }}
+            {% for message in form.Password.errors %}
+            <div class="error-alert">{{ message }}</div><br>
+            {% endfor %}
+            <button class="btn">登录 </button><br />
+            <a href="/sign-up/">注册</a>
         </div>
-        <label class="mdui-checkbox">
-            {{ form.Remember }}
-            <i class="mdui-checkbox-icon"></i>
-            记住我
-        </label>
-        <br>
-        {{ form.Submit(class="mdui-btn mdui-btn-raised mdui-ripple") }}
-        <a href="{{ url_for('main.sign_up') }}" class="mdui-btn mdui-btn-raised mdui-ripple">注册</a>
     </form>
-{% endblock %}
+    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
+        type="application/javascript"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <p class="center">趣聊（人机对话）请登录后使用。<br />作者：拉萨路小学 严子嘉&nbsp;&nbsp;<a href="https://hijiajia.xyz">网站：hijiajia.xyz</a>
+    </p>
+</body>
+
+</html>

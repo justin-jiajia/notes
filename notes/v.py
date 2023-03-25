@@ -56,7 +56,7 @@ def sign_up():
 @main.route('/')
 def index():
     if not current_user.is_authenticated:
-        return render_template('index_not_login.html')
+        return redirect(url_for('main.get_login'))
     del_form = Del()
     notes = Notes.query.order_by(Notes.time_stamp.desc()).with_parent(current_user). \
         paginate(request.args.get('page', 1, type=int), per_page=5)
